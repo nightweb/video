@@ -1,0 +1,45 @@
+<%= content_for(:title, @user.username) %>
+<div class="list-all-video">
+  <% @posts.each do |p|  %>
+  <div class="video">
+    <div class="video-thumbnai">
+      <%= link_to post_path(p), target: '_blank' do %><img src="http://i.ytimg.com/vi/<%= p.video_id %>/hqdefault.jpg" ><% end %>
+    </div>
+    <div class="video-info">
+      <h2><%= link_to p.title, post_path(p), target: '_blank' %></h2>
+      <div class="video-data">
+        <span>Post by: <%= link_to p.user.username, user_path(p.user), class: 'video-user' %></span>
+        <span>Views: <%= (p.viewed ? number_with_delimiter(p.viewed, delimiter: '.') : 0 ) %></span>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @posts %>
+<%= content_for :sidebar do %>
+  <div class="sidebar widgets user-box">
+    <h3>User Info</h3>
+    <div class="list-post">
+      <div class="user-detail">
+        <%= link_to user_path(@user), class: "link-avatar" do %>
+          <%= gravatar_url_for(@user) %>
+        <% end %>
+        <div class="user-profile">
+          <span class="username"><%= link_to @user.username, user_path(@user) %></span>
+          <br><span>Videos: <%= @user.posts.published.size %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar widgets featured-post">
+    <h3>Most Viewed</h3>
+    <div class="list-post">
+      <% @populare.each do |populare| %>
+      <div class="video-image">
+        <img src="https://i.ytimg.com/vi/<%= populare.video_id %>/hqdefault.jpg">
+        <span><%= link_to populare.title, post_path(populare) %></span>
+      </div>      
+      <% end %>
+    </div>
+  </div>
+<% end %>

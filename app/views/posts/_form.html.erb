@@ -1,0 +1,21 @@
+<%= form_for @post do |f| %>
+  <div class="input-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="input-group">
+    <%= f.label :tag_list, "Tags: " %>
+    <%= f.text_field :tag_list, class: 'form-control' %>
+  </div>
+  <div class="input-group">
+    <%= f.label :video_id %>
+    <%= f.text_field :video_id, class: 'form-control' %>
+  </div>
+  <div class="input-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control', rows: 10 %>
+  </div>
+  <div class="input-group">
+    <%= f.submit :'Submit', class: 'btn btn-submit btn-success' %>
+  </div>
+<% end %>

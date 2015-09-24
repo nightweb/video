@@ -1,0 +1,33 @@
+<% if permission? %>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Posts by</th>
+    <th>Title</th>
+    <th>Preview</th>
+    <td>Action</td>
+  </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="4"><%= will_paginate @post %></td></tr>
+    <% @post.each do |post|  %>
+    <tr>
+      <td width="10%"><%= post.user.username %></td>
+      <td width="60%"><%= post.title %></td>
+      <td width="20"><img src="http://img.youtube.com/vi/<%= post.video_id %>/mqdefault.jpg" style="with: 150px; height: 150px"></td>
+      <td width="10%">
+        <%= link_to published_post_path(post), method: :post do %>Publish <% end %>
+        <%= link_to 'edit', edit_post_path(post) %>
+        <%= link_to 'delete', post_path(post), method: :delete, data: { confirm: 'are you sure ?' } %>
+      </td>
+    </tr>
+    <% end %>
+    
+  </tbody>
+  <tfoot>
+    <tr><td colspan="4"><%= will_paginate @post %></td></tr>
+  </tfoot>
+</table>
+<% else %>
+  <%= link_to 'Back to home', posts_path %>
+<% end %>

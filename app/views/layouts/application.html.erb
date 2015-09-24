@@ -1,0 +1,36 @@
+<%= render 'layouts/header' %>
+<div class="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'layouts/messages' %>
+      <div class="col-xs-12 col-sm-8 col-lg-8 no-padding">
+        
+        <%= yield %>      
+      </div>
+      <div class="col-xs-12 col-sm-4 col-lg-4">
+        <%= yield :sidebar %>
+      </div>
+    </div>
+  </div>
+</div>
+<footer id="footer">
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <p>Copyright &#169; 2015</p>
+        </div>
+        <!-- <div class="col-xs-12 col-sm-6 col-lg-6">
+          <a href="#">test</a>
+          <a href="#">test</a>
+          <a href="#">test</a>
+          <a href="#">test</a>
+          <a href="#">test</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</footer>
+<%= yield :footer %>
+</body>
+</html>

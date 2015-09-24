@@ -1,0 +1,8 @@
+<% if obj.errors.any? %>
+<div class="alert alert-danger" role="alert">
+  <strong>Please correct following errors</strong><br>
+  <% obj.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
+<% end %>

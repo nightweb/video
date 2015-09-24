@@ -1,0 +1,19 @@
+<%= render 'share/errors', obj: @post %>
+<%= form_for @post do |f|  %>
+  <div class="input-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="input-group">
+    <%= f.label :tag_list, "Tags: " %>
+    <%= f.text_field :tag_list, class: 'form-control' %>
+  </div>
+  <div class="input-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <%= f.submit, class: 'btn btn-success btn-submit' %>
+<% end %>
+<% content_for :footer do %>
+  <%= javascript_include_tag 'admin' %>
+<% end %>

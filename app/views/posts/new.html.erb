@@ -1,0 +1,28 @@
+<%= content_for(:title, "Đăng Video Mới") %>
+<div class="submit-video">
+	<% if user_logged? %>
+		<h2>Đăng Video Mới</h2>
+		<%= render 'form' %>
+	<% else %>
+	  <h2>You have to <%= link_to 'Login',login_path %> to submit video</h2>
+	<% end %>
+</div>
+<%= content_for :sidebar do %>
+  <div class="sidebar widgets user-box">
+    <h3>Your Profile</h3>
+    <div class="list-post">
+      <div class="user-detail">
+        <%= link_to user_path(current_user), class: "link-avatar" do %>
+          <%= gravatar_url_for(current_user) %>
+        <% end %>
+        <div class="user-profile">
+        	<span class="username"><%= link_to current_user.username, user_path(current_user) %></span>
+        	<br><span>Videos: <%= current_user.posts.published.size %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% content_for :footer do %>
+  <%= javascript_include_tag 'admin' %>
+<% end %>

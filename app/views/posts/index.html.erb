@@ -1,0 +1,32 @@
+<%= content_for(:title, "Video Mới") %>
+<% meta_tag :description, 'Video Mới, video hài mới nhất' %>
+<div class="list-all-video">
+  <% @post.each do |p|  %>
+  <div class="video">
+    <div class="video-thumbnai">
+      <%= link_to post_path(p), target: '_blank' do %><img src="http://i.ytimg.com/vi/<%= p.video_id %>/hqdefault.jpg" ><% end %>
+    </div>
+    <div class="video-info">
+      <h2><%= link_to p.title, post_path(p), target: '_blank' %></h2>
+      <div class="video-data">
+        <span>Post by: <%= link_to p.user.username, user_path(p.user), class: 'video-user' %></span>
+        <span>Views: <%= (p.viewed ? number_with_delimiter(p.viewed, delimiter: '.') : 0 ) %></span>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @post %>
+<%= content_for :sidebar do %>
+  <div class="sidebar widgets featured-post">
+    <h3>Video Được Xem Nhiều</h3>
+    <div class="list-post">
+      <% @populare.each do |populare| %>
+      <div class="video-image">
+        <img src="https://i.ytimg.com/vi/<%= populare.video_id %>/default.jpg">
+        <span><%= link_to populare.title, post_path(populare) %></span>
+      </div>      
+      <% end %>
+    </div>
+  </div>
+<% end %>
