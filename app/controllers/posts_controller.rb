@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @populare = Post.most_viewd
+    @populare = Post.relate(@post.id, @post.tag_ids)
     @post.update_viewed
     
   end

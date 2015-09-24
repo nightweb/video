@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   after_initialize :init
   
   scope :populare, ->{ where(status: 'published').order(updated_at: :asc).limit(10) }
-  scope :relate, ->(id, tag_ids){ joins(:taggings).where(taggings: { tag_id: tag_ids }).group(id).where.not(id: id).limit(10) }
+  scope :relate, ->(id, tag_ids){ joins(:taggings).where(taggings: { tag_id: tag_ids }).group(id).limit(10) }
   scope :most_viewd, ->{where(status: 'published').order(viewed: :desc).limit(10)}
   scope :published, ->{ where(status: 'published').order(updated_at: :desc) }
   scope :post_draf, ->{ where(status: nil).order(created_at: :desc) }
