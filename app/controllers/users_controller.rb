@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     role = Role.find_by(name: 'member')
     @user = role.users.new(user_params)
     if  @user.save()
-      UserMailer.registration_confirmation(@user).deliver_now
+      # UserMailer.registration_confirmation(@user).deliver_now
       flash[:success] = "Please confirm your email address to continue"
       session[:user_id] = @user.id
       redirect_to posts_path
