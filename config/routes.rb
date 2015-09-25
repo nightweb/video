@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users do
+  resources :users, except: [:new] do
     member do
       get :confirm_mail
     end
