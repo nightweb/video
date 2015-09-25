@@ -88,4 +88,5 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  
   }
+  config.action_mailer.default_url_options = { :host => 'aqueous-atoll-8972.herokuapp.com' }
 end
