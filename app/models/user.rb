@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :posts
   belongs_to :role
   has_many :likes
+  before_create :confirmation_token
   before_save { self.email = email.downcase }
   validates :username, presence: true, length: { minimum: 3, maximum: 40 }, uniqueness: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -10,4 +11,16 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, maximum: 32 }, confirmation: true
   has_secure_password
   scope :check_user, ->( user_name ) { where("username = ? or email = ?", user_name, user_name) }
+
+  def email_active
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+  private
+    def confirmation_token
+        if self.confirm_token.blank?
+          self.confirm_token = SecureRandom.urlsafe_base64.to_s
+        end
+    end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def index
     @user = User.all
   end
@@ -12,10 +13,12 @@ class UsersController < ApplicationController
     role = Role.find_by(name: 'member')
     @user = role.users.new(user_params)
     if  @user.save()
-      flash[:success] = "Register successful"
+      UserMailer.registration_confirmation(@user).deliver
+      flash[:success] = "Please confirm your email address to continue"
       session[:user_id] = @user.id
       redirect_to posts_path
     else
+      flash[:warning] = "Oooppss!, somthing went wrong"
       render :new
     end
   end
@@ -30,6 +33,17 @@ class UsersController < ApplicationController
     @post = Post.post_draf.paginate(page: params[:page], per_page: 10)
   end
   
+  def confirm_mail
+    user = User.find_by_confirm_token(params[:id])
+    if user
+      user.email_active
+      flash[:success] = "Welcome to RubyonRails App! Your email has been confirmed"
+      redirect_to login_path
+    else
+      flash[:warning] = "Sorry, User does not exist"
+      redirect_to root_path
+    end
+  end
   # def show
   #   @post = Post.find(params[:id])
   # end
@@ -38,4 +52,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
+    
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922203226) do
+ActiveRecord::Schema.define(version: 20150925091108) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 255
@@ -69,9 +69,11 @@ ActiveRecord::Schema.define(version: 20150922203226) do
     t.string   "username",        limit: 255
     t.string   "email",           limit: 255
     t.string   "password_digest", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "role_id",         limit: 4
+    t.boolean  "email_confirmed", limit: 1,   default: false
+    t.string   "confirm_token",   limit: 255
   end
 
   add_foreign_key "taggings", "posts"
