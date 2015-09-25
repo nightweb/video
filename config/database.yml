@@ -52,3 +52,5 @@ production:
   database: video_share_production
   username: video_share
   password: <%= ENV['VIDEO_SHARE_DATABASE_PASSWORD'] %>
+gmail_username: 'ytdse02415@ftp.edu.vn'
+gmail_password: 'dangy89'
