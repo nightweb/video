@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
   
   def user_logged?
-    !!current_user
+    !!current_user 
   end
   
   def permission?

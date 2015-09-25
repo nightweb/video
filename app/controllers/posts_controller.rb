@@ -10,7 +10,12 @@ class PostsController < ApplicationController
   
   def new
     if user_logged?
-      @post = Post.new
+      if current_user.email_confirmed
+        @post = Post.new
+      else
+        flash[:warning] = "Your email is not confirmed!Please go to your email to confirm"
+        redirect_to root_path
+      end
     else
       redirect_to login_path
     end
